@@ -3,7 +3,34 @@
     "containerDefinitions" : [
         {
             "name" : "client",
-            "image" : "lakshyapurwar/multi-client"
+            "image" : "lakshyapurwar/multi-client",
+            "hostname" : "client",
+            "essential" : false
+        },
+        {
+            "name" : "server",
+            "image" : "lakshyapurwar/multi-server",
+            "hostname" : "api",
+            "essential" : false
+        },
+        {
+            "name" : "worker",
+            "image" : "lakshyapurwar/multi-worker",
+            "hostname" : "worker",
+            "essential" : false
+        },
+        {
+            "name" : "nginx",
+            "image" : "lakshyapurwar/multi-nginx",
+            "hostname" : "nginx",
+            "essential" : true,
+            "portMappings" : [
+                {
+                    "hostPort" : 80,
+                    "containerPort" : 80
+                }
+            ],
+            "links" : ["client","server"]
         }
     ]
 }
